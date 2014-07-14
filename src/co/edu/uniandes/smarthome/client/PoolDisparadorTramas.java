@@ -17,6 +17,7 @@ public class PoolDisparadorTramas implements Executor {
 	
 	public static String PUBLIC_KEY;
 	public static String HOST;
+	public static String SECONDARY_HOST;
 	public static int PRIMARY_PORT;
 	public static int SECONDARY_PORT;
 
@@ -45,6 +46,7 @@ public class PoolDisparadorTramas implements Executor {
 	        properties.load( fis );
 	        PUBLIC_KEY = properties.getProperty("security.publickey");
 	        HOST = properties.getProperty("host");
+	        SECONDARY_HOST = properties.getProperty("secondaryHost");
 	        PRIMARY_PORT = Integer.parseInt(properties.getProperty("primaryPort"));
 	        SECONDARY_PORT = Integer.parseInt(properties.getProperty("secondaryPort"));
     	}catch(Exception e){
@@ -120,7 +122,7 @@ class Task implements Runnable {
 		catch (Exception e) {
 			e.printStackTrace();
 			try{
-				send(PoolDisparadorTramas.HOST, PoolDisparadorTramas.SECONDARY_PORT);
+				send(PoolDisparadorTramas.SECONDARY_HOST, PoolDisparadorTramas.SECONDARY_PORT);
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}
